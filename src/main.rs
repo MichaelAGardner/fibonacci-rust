@@ -3,12 +3,15 @@ use clap::Parser;
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Cli{
-    #[arg(short, long)]
-    option: Option<String>,
+    #[arg(short='f', long="final", help="Print only the number requested")]
+    final_number_only: bool,
+    #[arg(short='a', long="all", help="Print all numbers up to number requested")]
+    all_numbers: bool,
+    #[arg(required=true, value_name="fibonacci number")]
     fibonacci_number: u32,
 }
 fn main() {
     let cli =Cli::parse();
 
-    println!("option, number: {:?}, {:?}",cli.option.as_deref(),cli.fibonacci_number);
+    println!("number: {:?}", cli.fibonacci_number);
 }
