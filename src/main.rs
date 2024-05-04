@@ -3,12 +3,7 @@ use clap::Parser;
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Cli {
-    #[arg(
-        short = 'f',
-        long = "final",
-        help = "Print only the number requested",
-        default_value = "true"
-    )]
+    #[arg(short = 'f', long = "final", help = "Print only the number requested")]
     final_number_only: bool,
     #[arg(
         short = 'a',
@@ -21,15 +16,16 @@ struct Cli {
 }
 fn main() {
     let cli = Cli::parse();
+    let no_flag = cli.final_number_only == cli.all_numbers;
 
-    if cli.final_number_only {
+    if cli.final_number_only || no_flag {
         println!("Printing final fibonacci number");
         calculate_fibonacci_number(cli.fibonacci_number);
     }
 
     if cli.all_numbers {
         for i in 1..=cli.fibonacci_number as u32 {
-            println!("Printing all fibonacci numbers");
+            calculate_fibonacci_number(i as f32)
         }
     }
 
