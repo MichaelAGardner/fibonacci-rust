@@ -29,3 +29,13 @@ fn main() {
 
     println!("number: {:?}", cli.fibonacci_number);
 }
+
+fn calculate_fibonacci_number(number: u32) {
+    let sqrt_five = f32::sqrt(5.0) as u32 + 1;
+    let phi = (1 + sqrt_five).pow(number);
+    let psi = (1 - sqrt_five).pow(number);
+
+    let fibonacci = (phi - psi) / (2_u32.pow(number) * sqrt_five);
+
+    println!("{fibonacci}");
+}
