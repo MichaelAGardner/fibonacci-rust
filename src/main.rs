@@ -19,7 +19,6 @@ fn main() {
     let no_flag = cli.final_number_only == cli.all_numbers;
 
     if cli.final_number_only || no_flag {
-        println!("Printing final fibonacci number");
         calculate_fibonacci_number(cli.fibonacci_number);
     }
 
