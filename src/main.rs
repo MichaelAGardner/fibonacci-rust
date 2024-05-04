@@ -13,5 +13,13 @@ struct Cli{
 fn main() {
     let cli =Cli::parse();
 
+    if cli.final_number_only {
+        println!("Printing final fibonacci number");
+    }
+
+    if cli.all_numbers {
+        println!("Printing all fibonacci numbers");
+    }
+
     println!("number: {:?}", cli.fibonacci_number);
 }
