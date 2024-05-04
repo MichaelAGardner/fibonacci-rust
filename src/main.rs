@@ -28,8 +28,6 @@ fn main() {
             calculate_fibonacci_number(i as f32)
         }
     }
-
-    println!("number: {:?}", cli.fibonacci_number);
 }
 
 fn calculate_fibonacci_number(number: f32) {
