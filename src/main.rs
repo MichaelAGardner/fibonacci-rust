@@ -3,7 +3,12 @@ use clap::Parser;
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Cli {
-    #[arg(short = 'f', long = "final", help = "Print only the number requested")]
+    #[arg(
+        short = 'f',
+        long = "final",
+        help = "Print only the number requested",
+        default_value = "true"
+    )]
     final_number_only: bool,
     #[arg(
         short = 'a',
@@ -12,17 +17,18 @@ struct Cli {
     )]
     all_numbers: bool,
     #[arg(required = true, value_name = "fibonacci number")]
-    fibonacci_number: u32,
+    fibonacci_number: f32,
 }
 fn main() {
     let cli = Cli::parse();
 
     if cli.final_number_only {
         println!("Printing final fibonacci number");
+        calculate_fibonacci_number(cli.fibonacci_number);
     }
 
     if cli.all_numbers {
-        for i in 1..=cli.fibonacci_number {
+        for i in 1..=cli.fibonacci_number as u32 {
             println!("Printing all fibonacci numbers");
         }
     }
@@ -30,12 +36,12 @@ fn main() {
     println!("number: {:?}", cli.fibonacci_number);
 }
 
-fn calculate_fibonacci_number(number: u32) {
-    let sqrt_five = f32::sqrt(5.0) as u32 + 1;
-    let phi = (1 + sqrt_five).pow(number);
-    let psi = (1 - sqrt_five).pow(number);
+fn calculate_fibonacci_number(number: f32) {
+    let sqrt_five = 5.0_f32.sqrt();
+    let phi = (1.0_f32 + sqrt_five).powf(number);
+    let psi = (1.0_f32 - sqrt_five).powf(number);
 
-    let fibonacci = (phi - psi) / (2_u32.pow(number) * sqrt_five);
+    let fibonacci = ((phi - psi) / (2_i32.pow(number as u32) as f32 * sqrt_five)) as u32;
 
     println!("{fibonacci}");
 }
